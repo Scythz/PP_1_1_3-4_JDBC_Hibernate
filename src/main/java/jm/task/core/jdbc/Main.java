@@ -12,7 +12,7 @@ import java.sql.Statement;
 
 public class Main {
     public static void main(String[] args) {
-        UserServiceImpl us = new UserServiceImpl();
+        UserService us = new UserServiceImpl();
         us.createUsersTable();
         us.saveUser("Kek", "Kekovich", (byte) 1);
         us.saveUser("Keke", "Kekovic", (byte) 2);
