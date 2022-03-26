@@ -12,15 +12,15 @@ import java.sql.Statement;
 
 public class Main {
     public static void main(String[] args) {
-        UserDaoJDBCImpl ud = new UserDaoJDBCImpl();
-        ud.createUsersTable();
-        ud.saveUser("Kek", "Kekovich", (byte) 1);
-        ud.saveUser("Keke", "Kekovic", (byte) 2);
-        ud.saveUser("Kekek", "Kekovi", (byte) 3);
-        ud.saveUser("Kekeke", "Kekov", (byte) 4);
-        ud.getAllUsers();
-        ud.cleanUsersTable();
-        ud.dropUsersTable();
+        UserServiceImpl us = new UserServiceImpl();
+        us.createUsersTable();
+        us.saveUser("Kek", "Kekovich", (byte) 1);
+        us.saveUser("Keke", "Kekovic", (byte) 2);
+        us.saveUser("Kekek", "Kekovi", (byte) 3);
+        us.saveUser("Kekeke", "Kekov", (byte) 4);
+        us.getAllUsers();
+        us.cleanUsersTable();
+        us.dropUsersTable();
 
     }
 }
