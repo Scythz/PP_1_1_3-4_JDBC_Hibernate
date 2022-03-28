@@ -5,12 +5,13 @@ import jm.task.core.jdbc.service.UserService;
 import jm.task.core.jdbc.service.UserServiceImpl;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Consumer;
 
 public class Main {
     public static void main(String[] args) {
         UserService us = new UserServiceImpl();
-        ArrayList<User> users = new ArrayList<>();
+        List<User> users = new ArrayList<>();
         users.add(new User("Kek", "Kekovich", (byte) 1));
         users.add(new User("Keke", "Kekovic", (byte) 2));
         users.add(new User("Kekek", "Kekovi", (byte) 3));
