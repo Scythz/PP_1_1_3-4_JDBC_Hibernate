@@ -11,6 +11,7 @@ import java.util.function.Consumer;
 public class Main {
     public static void main(String[] args) {
         UserService us = new UserServiceImpl();
+
         List<User> users = new ArrayList<>();
         users.add(new User("Kek", "Kekovich", (byte) 1));
         users.add(new User("Keke", "Kekovic", (byte) 2));
