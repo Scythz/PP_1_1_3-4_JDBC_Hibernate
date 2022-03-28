@@ -12,11 +12,11 @@ public class Main {
     public static void main(String[] args) {
         UserService us = new UserServiceImpl();
 
-        List<User> users = new ArrayList<>();
-        users.add(new User("Kek", "Kekovich", (byte) 1));
-        users.add(new User("Keke", "Kekovic", (byte) 2));
-        users.add(new User("Kekek", "Kekovi", (byte) 3));
-        users.add(new User("Kekeke", "Kekov", (byte) 4));
+        List<User> newUsers = new ArrayList<>();
+        newUsers.add(new User("Kek", "Kekovich", (byte) 1));
+        newUsers.add(new User("Keke", "Kekovic", (byte) 2));
+        newUsers.add(new User("Kekek", "Kekovi", (byte) 3));
+        newUsers.add(new User("Kekeke", "Kekov", (byte) 4));
 
         Consumer<User> saveUserAndSout = (x) -> {
             us.saveUser(x.getName(), x.getLastName(), x.getAge());
@@ -24,10 +24,9 @@ public class Main {
         };
 
         us.createUsersTable();
-        for (User user : users) {
-            saveUserAndSout.accept(user);
-        }
-        us.getAllUsers();
+        newUsers.forEach(saveUserAndSout);
+        List<User> users = us.getAllUsers();
+        users.forEach(System.out::println);
         us.cleanUsersTable();
         us.dropUsersTable();
 

@@ -74,7 +74,6 @@ public class UserDaoJDBCImpl implements UserDao {
                 user.setId(id);
                 users.add(user);
             }
-            System.out.println(users);
             return users;
 
         } catch (SQLException e) {
