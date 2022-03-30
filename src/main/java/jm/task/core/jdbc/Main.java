@@ -27,13 +27,12 @@ public class Main {
             System.out.println("User с именем – " + x.getName() + " добавлен в базу данных");
         };
 
+
         us.createUsersTable();
         newUsers.forEach(saveUserAndSout);
         List<User> users = us.getAllUsers();
         users.forEach(System.out::println);
         us.cleanUsersTable();
-        List<User> usersz = us.getAllUsers();
-        usersz.forEach(System.out::println);
         us.dropUsersTable();
 
     }
