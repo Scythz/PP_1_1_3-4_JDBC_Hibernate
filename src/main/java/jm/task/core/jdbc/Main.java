@@ -3,6 +3,9 @@ package jm.task.core.jdbc;
 import jm.task.core.jdbc.model.User;
 import jm.task.core.jdbc.service.UserService;
 import jm.task.core.jdbc.service.UserServiceImpl;
+import jm.task.core.jdbc.util.Util;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +21,7 @@ public class Main {
         newUsers.add(new User("Kekek", "Kekovi", (byte) 3));
         newUsers.add(new User("Kekeke", "Kekov", (byte) 4));
 
+
         Consumer<User> saveUserAndSout = (x) -> {
             us.saveUser(x.getName(), x.getLastName(), x.getAge());
             System.out.println("User с именем – " + x.getName() + " добавлен в базу данных");
@@ -28,6 +32,8 @@ public class Main {
         List<User> users = us.getAllUsers();
         users.forEach(System.out::println);
         us.cleanUsersTable();
+        List<User> usersz = us.getAllUsers();
+        usersz.forEach(System.out::println);
         us.dropUsersTable();
 
     }
