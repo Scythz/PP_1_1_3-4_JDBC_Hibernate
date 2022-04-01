@@ -18,32 +18,45 @@ public class Util {
     final private static String connectionUrl = "jdbc:mysql://localhost:3306/kata";
     final private static String driver = "com.mysql.cj.jdbc.Driver";
 
-    private static SessionFactory sessionFactory;
+
+    public static class FactoryHolder {
+        private static SessionFactory sessionFactory;
+
+        public static final SessionFactory FACTORY = initialize();
+
+        private static SessionFactory initialize() {
+            if (sessionFactory == null) {
+                try {
+                    Configuration configuration = new Configuration();
+
+                    Properties settings = new Properties();
+                    settings.put(Environment.DRIVER, driver);
+                    settings.put(Environment.URL, connectionUrl);
+                    settings.put(Environment.USER, userName);
+                    settings.put(Environment.PASS, password);
+                    settings.put(Environment.DIALECT, "org.hibernate.dialect.MySQLDialect");
+
+                    configuration.setProperties(settings);
+                    configuration.addAnnotatedClass(User.class);
+
+                    ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties()).build();
+
+                    sessionFactory = configuration.buildSessionFactory(serviceRegistry);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            return sessionFactory;
+        }
+    }
+
 
     public static SessionFactory getSessionFactory() {
-        if (sessionFactory == null) {
-            try {
-                Configuration configuration = new Configuration();
-
-                Properties settings = new Properties();
-                settings.put(Environment.DRIVER, driver);
-                settings.put(Environment.URL, connectionUrl);
-                settings.put(Environment.USER, userName);
-                settings.put(Environment.PASS, password);
-                settings.put(Environment.DIALECT, "org.hibernate.dialect.MySQLDialect");
-
-                configuration.setProperties(settings);
-                configuration.addAnnotatedClass(User.class);
-
-                ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties()).build();
-
-                sessionFactory = configuration.buildSessionFactory(serviceRegistry);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-        return sessionFactory;
+        return FactoryHolder.FACTORY;
     }
+
+
+
 
     public Connection connect() {
         Connection connection = null;
