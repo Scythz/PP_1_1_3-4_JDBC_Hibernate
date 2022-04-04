@@ -17,9 +17,19 @@ public class Util {
     final private static String password = "ert645qw";
     final private static String connectionUrl = "jdbc:mysql://localhost:3306/kata";
     final private static String driver = "com.mysql.cj.jdbc.Driver";
+    final private static SessionFactory FACTORY = FactoryHolder.FACTORY;
 
+    public static class UtilHolder{
+        public static final Util UTIL_INSTANCE = new Util();
+    }
+    public static Util getInstance() {
+        return UtilHolder.UTIL_INSTANCE;
+    }
 
-    public static class FactoryHolder {
+    private Util() {
+    }
+
+    private static class FactoryHolder {
         private static SessionFactory sessionFactory;
 
         public static final SessionFactory FACTORY = initialize();
@@ -51,8 +61,8 @@ public class Util {
     }
 
 
-    public static SessionFactory getSessionFactory() {
-        return FactoryHolder.FACTORY;
+    public static SessionFactory getFactory() {
+        return FACTORY;
     }
 
 
