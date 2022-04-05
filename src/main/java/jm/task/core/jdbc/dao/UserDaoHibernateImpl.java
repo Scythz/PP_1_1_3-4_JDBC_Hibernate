@@ -9,12 +9,11 @@ import org.hibernate.Transaction;
 import java.util.List;
 
 public class UserDaoHibernateImpl implements UserDao {
-    private static final SessionFactory SESSION_FACTORY = Util.getFactory();
+    private static final SessionFactory SESSION_FACTORY = Util.getSessionFactory();
 
     public UserDaoHibernateImpl() {
 
     }
-
 
     @Override
     public void createUsersTable() {

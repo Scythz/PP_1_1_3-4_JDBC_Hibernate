@@ -19,12 +19,10 @@ public class Main {
         newUsers.add(new User("Kekek", "Kekovi", (byte) 3));
         newUsers.add(new User("Kekeke", "Kekov", (byte) 4));
 
-
         Consumer<User> saveUserAndSout = (x) -> {
             us.saveUser(x.getName(), x.getLastName(), x.getAge());
             System.out.println("User с именем – " + x.getName() + " добавлен в базу данных");
         };
-
 
         us.createUsersTable();
         newUsers.forEach(saveUserAndSout);
