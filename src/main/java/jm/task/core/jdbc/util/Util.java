@@ -34,19 +34,15 @@ public class Util {
         if (sessionFactory == null) {
             try {
                 Configuration configuration = new Configuration();
-
                 Properties settings = new Properties();
                 settings.put(Environment.DRIVER, driver);
                 settings.put(Environment.URL, connectionUrl);
                 settings.put(Environment.USER, userName);
                 settings.put(Environment.PASS, password);
                 settings.put(Environment.DIALECT, "org.hibernate.dialect.MySQLDialect");
-
                 configuration.setProperties(settings);
                 configuration.addAnnotatedClass(User.class);
-
                 ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties()).build();
-
                 sessionFactory = configuration.buildSessionFactory(serviceRegistry);
             } catch (Exception e) {
                 e.printStackTrace();
