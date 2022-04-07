@@ -30,7 +30,7 @@ public class Util {
         return utilInstance;
     }
 
-    public static SessionFactory getSessionFactory() {
+    public  SessionFactory getSessionFactory() {
         if (sessionFactory == null) {
             try {
                 Configuration configuration = new Configuration();
