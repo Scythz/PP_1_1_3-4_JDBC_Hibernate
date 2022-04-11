@@ -31,10 +31,8 @@ public class UserDaoHibernateImpl implements UserDao {
             session.createSQLQuery(sql).addEntity(User.class).executeUpdate();
             tx.commit();
         } catch (Exception e) {
-            try {
+            if (tx != null) {
                 tx.rollback();
-            } catch (Exception r) {
-                r.printStackTrace();
             }
         }
     }
@@ -48,10 +46,8 @@ public class UserDaoHibernateImpl implements UserDao {
                     .executeUpdate();
             tx.commit();
         } catch (Exception e) {
-            try {
+            if (tx != null) {
                 tx.rollback();
-            } catch (Exception r) {
-                r.printStackTrace();
             }
         }
     }
@@ -65,10 +61,8 @@ public class UserDaoHibernateImpl implements UserDao {
             session.save(user);
             tx.commit();
         } catch (Exception e) {
-            try {
+            if (tx != null) {
                 tx.rollback();
-            } catch (Exception r) {
-                r.printStackTrace();
             }
         }
     }
@@ -82,10 +76,8 @@ public class UserDaoHibernateImpl implements UserDao {
             session.delete(user);
             tx.commit();
         } catch (Exception e) {
-            try {
+            if (tx != null) {
                 tx.rollback();
-            } catch (Exception r) {
-                r.printStackTrace();
             }
         }
     }
@@ -114,10 +106,8 @@ public class UserDaoHibernateImpl implements UserDao {
             session.createSQLQuery("TRUNCATE TABLE users").executeUpdate();
             tx.commit();
         } catch (Exception e) {
-            try {
+            if (tx != null) {
                 tx.rollback();
-            } catch (Exception r) {
-                r.printStackTrace();
             }
         }
 
