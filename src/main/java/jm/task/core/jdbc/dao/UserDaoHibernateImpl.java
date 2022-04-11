@@ -6,6 +6,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public class UserDaoHibernateImpl implements UserDao {
@@ -20,7 +21,6 @@ public class UserDaoHibernateImpl implements UserDao {
         Transaction tx = null;
         try (Session session = SESSION_FACTORY.openSession()) {
             tx = session.beginTransaction();
-
             String sql = "CREATE TABLE IF NOT EXISTS `kata`.`users` (\n" +
                     "  `id` BIGINT NOT NULL AUTO_INCREMENT,\n" +
                     "  `name` TEXT NULL,\n" +
@@ -30,10 +30,10 @@ public class UserDaoHibernateImpl implements UserDao {
                     "  UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE);";
             session.createSQLQuery(sql).addEntity(User.class).executeUpdate();
             tx.commit();
-        } catch (RuntimeException e) {
+        } catch (Exception e) {
             try {
                 tx.rollback();
-            } catch (RuntimeException r) {
+            } catch (Exception r) {
                 r.printStackTrace();
             }
         }
@@ -47,10 +47,10 @@ public class UserDaoHibernateImpl implements UserDao {
             session.createSQLQuery("DROP TABLE IF EXISTS `kata`.`users`;")
                     .executeUpdate();
             tx.commit();
-        } catch (RuntimeException e) {
+        } catch (Exception e) {
             try {
                 tx.rollback();
-            } catch (RuntimeException r) {
+            } catch (Exception r) {
                 r.printStackTrace();
             }
         }
@@ -64,10 +64,10 @@ public class UserDaoHibernateImpl implements UserDao {
             User user = new User(name, lastName, age);
             session.save(user);
             tx.commit();
-        } catch (RuntimeException e) {
+        } catch (Exception e) {
             try {
                 tx.rollback();
-            } catch (RuntimeException r) {
+            } catch (Exception r) {
                 r.printStackTrace();
             }
         }
@@ -81,10 +81,10 @@ public class UserDaoHibernateImpl implements UserDao {
             User user = session.get(User.class, id);
             session.delete(user);
             tx.commit();
-        } catch (RuntimeException e) {
+        } catch (Exception e) {
             try {
                 tx.rollback();
-            } catch (RuntimeException r) {
+            } catch (Exception r) {
                 r.printStackTrace();
             }
         }
@@ -113,10 +113,10 @@ public class UserDaoHibernateImpl implements UserDao {
             tx = session.beginTransaction();
             session.createSQLQuery("TRUNCATE TABLE users").executeUpdate();
             tx.commit();
-        } catch (RuntimeException e) {
+        } catch (Exception e) {
             try {
                 tx.rollback();
-            } catch (RuntimeException r) {
+            } catch (Exception r) {
                 r.printStackTrace();
             }
         }
