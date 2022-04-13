@@ -2,6 +2,7 @@ package jm.task.core.jdbc.dao;
 
 import jm.task.core.jdbc.model.User;
 import jm.task.core.jdbc.util.Util;
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -31,6 +32,7 @@ public class UserDaoHibernateImpl implements UserDao {
             session.createSQLQuery(sql).addEntity(User.class).executeUpdate();
             tx.commit();
         } catch (Exception e) {
+            e.printStackTrace();
             if (tx != null) {
                 tx.rollback();
             }
@@ -46,6 +48,7 @@ public class UserDaoHibernateImpl implements UserDao {
                     .executeUpdate();
             tx.commit();
         } catch (Exception e) {
+            e.printStackTrace();
             if (tx != null) {
                 tx.rollback();
             }
@@ -61,6 +64,7 @@ public class UserDaoHibernateImpl implements UserDao {
             session.save(user);
             tx.commit();
         } catch (Exception e) {
+            e.printStackTrace();
             if (tx != null) {
                 tx.rollback();
             }
@@ -76,6 +80,7 @@ public class UserDaoHibernateImpl implements UserDao {
             session.delete(user);
             tx.commit();
         } catch (Exception e) {
+            e.printStackTrace();
             if (tx != null) {
                 tx.rollback();
             }
@@ -92,7 +97,11 @@ public class UserDaoHibernateImpl implements UserDao {
             e.printStackTrace();
         } finally {
             if (session != null) {
-                session.close();
+                try {
+                    session.close();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         }
         return users;
@@ -106,6 +115,7 @@ public class UserDaoHibernateImpl implements UserDao {
             session.createSQLQuery("TRUNCATE TABLE users").executeUpdate();
             tx.commit();
         } catch (Exception e) {
+            e.printStackTrace();
             if (tx != null) {
                 tx.rollback();
             }
