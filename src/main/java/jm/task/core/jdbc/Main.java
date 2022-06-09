@@ -20,7 +20,7 @@ public class Main {
 
         Consumer<User> saveUserAndSout = (x) -> {
             us.saveUser(x.getName(), x.getLastName(), x.getAge());
-            System.out.println("User СЃ РёРјРµРЅРµРј вЂ“ " + x.getName() + " РґРѕР±Р°РІР»РµРЅ РІ Р±Р°Р·Сѓ РґР°РЅРЅС‹С…");
+            System.out.println("User с именем – " + x.getName() + " добавлен в базу данных");
         };
 
         us.createUsersTable();
