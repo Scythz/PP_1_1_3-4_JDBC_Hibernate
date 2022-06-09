@@ -14,7 +14,7 @@ import java.util.Properties;
 
 public class Util {
     final private static String userName = "root";
-    final private static String password = "ert645qw";
+    final private static String password = "ErT645QwE";
     final private static String connectionUrl = "jdbc:mysql://localhost:3306/kata";
     final private static String driver = "com.mysql.cj.jdbc.Driver";
     private static Util utilInstance;
